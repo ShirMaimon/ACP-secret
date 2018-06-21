@@ -1,0 +1,3 @@
+/home/parallels/ACP/coin_toss/CMakeFiles/edit_cache.dir
+/home/parallels/ACP/coin_toss/CMakeFiles/rebuild_cache.dir
+/home/parallels/ACP/coin_toss/CMakeFiles/cointoss.dir
