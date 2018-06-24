@@ -31,127 +31,108 @@
 #include "libscapi/include/primitives/Matrix.hpp"
 #include "ProtocolParty.h"
 
-#define SHA256_BYTE_SIZE		32
+#define SHARE_BYTE_SIZE		8      // SHOULD be the size of each share
 #define SEED_BYTE_SIZE			16
 
 #define LC log4cpp::Category::getInstance(m_logcat)
 
-cc_coin_toss::cc_coin_toss(const comm_client_factory::client_type_t cc_type, comm_client::cc_args_t * cc_args)
+template <class T>
+cc_coin_toss<T>::cc_coin_toss(const comm_client_factory::client_type_t cc_type, comm_client::cc_args_t * cc_args, string field)
 : ac_protocol(cc_type, cc_args), m_rounds(0)
 {
+    fieldType = field;
 }
 
-cc_coin_toss::~cc_coin_toss()
+template <class T>
+cc_coin_toss<T>::~cc_coin_toss()
 {
 }
 
-int cc_coin_toss::run(const size_t id, const size_t parties, const char * conf_file, const size_t rounds, const size_t idle_timeout_seconds)
+template <class T>
+int cc_coin_toss<T>::run(const size_t id, const size_t parties, const char * conf_file, const size_t rounds, const size_t idle_timeout_seconds)
 {
 	LC.notice("%s: running protocol.", __FUNCTION__);
 	m_rounds = rounds;
 	return ac_protocol::run_ac_protocol(id, parties, conf_file, idle_timeout_seconds);
 }
 
-int cc_coin_toss::pre_run()
+template <class T>
+int cc_coin_toss<T>::pre_run()
 {
-	m_toss_outcomes.clear();
+	m_secrets.clear();
 	m_party_states.clear();
 	m_party_states.resize(m_parties);
 
-	if(0 != generate_data(m_id, m_party_states[m_id].seed, m_party_states[m_id].commit))
-	{
-		LC.error("%s: self data generation failed; toss failure.", __FUNCTION__);
-		return -1;
-	}
+	// Rewrite to generate randomness for packed multiplication
+
+//	if(0 != generate_data(m_id, m_party_states[m_id].seed, m_party_states[m_id].commit))
+//	{
+//		LC.error("%s: self data generation failed; toss failure.", __FUNCTION__);
+//		return -1;
+//	}
 	return 0;
 }
 
-int cc_coin_toss::post_run()
+template <class T>
+int cc_coin_toss<T>::post_run()
 {
-	m_party_states.clear();
-
-	if(m_toss_outcomes.size() != m_rounds)
-	{
-		LC.error("%s: invalid number of toss results %lu out of %lu; toss failure.", __FUNCTION__, m_toss_outcomes.size(), m_rounds);
-		return -1;
-	}
-	size_t round = 0;
-	for(std::list< std::vector< u_int8_t > >::const_iterator toss = m_toss_outcomes.begin(); toss != m_toss_outcomes.end(); ++toss, ++round)
-	{
-		LC.info("%s: toss result %lu = <%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X>",
-				__FUNCTION__, round,
-				(*toss)[0], (*toss)[1], (*toss)[2], (*toss)[3], (*toss)[4], (*toss)[5], (*toss)[6], (*toss)[7],
-				(*toss)[8], (*toss)[9], (*toss)[10], (*toss)[11], (*toss)[12], (*toss)[13], (*toss)[14], (*toss)[15]);
-	}
+//	m_party_states.clear();
+//
+//	if(m_secrets.size() != m_rounds)
+//	{
+//		LC.error("%s: invalid number of toss results %lu out of %lu; toss failure.", __FUNCTION__, m_secrets.size(), m_rounds);
+//		return -1;
+//	}
+//	size_t round = 0;
+//	for(std::list< std::vector< u_int8_t > >::const_iterator toss = m_secrets.begin(); toss != m_secrets.end(); ++toss, ++round)
+//	{
+//		LC.info("%s: toss result %lu = <%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X>",
+//				__FUNCTION__, round,
+//				(*toss)[0], (*toss)[1], (*toss)[2], (*toss)[3], (*toss)[4], (*toss)[5], (*toss)[6], (*toss)[7],
+//				(*toss)[8], (*toss)[9], (*toss)[10], (*toss)[11], (*toss)[12], (*toss)[13], (*toss)[14], (*toss)[15]);
+//	}
 	return 0;
 }
 
-int cc_coin_toss::generate_data(const size_t id, std::vector<u_int8_t> & seed, std::vector<u_int8_t> & commit) const
+// change function to generate shares of a random value
+template <class T>
+int cc_coin_toss<T>::generate_data(std::vector<T>& secret) const
 {
 	int result = -1;
-	seed.resize(SEED_BYTE_SIZE);
-	commit.resize(SHA256_BYTE_SIZE);
-	if(RAND_bytes(seed.data(), 16))
-	{
-		if(0 == (result = commit_seed(id, seed, commit)))
-			LC.debug("%s: %lu data generated.", __FUNCTION__, id);
-		else
-			LC.error("%s: commit_seed() failed.", __FUNCTION__);
-	}
-	else
-		LC.error("%s: RAND_bytes() failed.", __FUNCTION__);
+	m_secrets.push_back(1000);
+	//m_secrets.push_back(2000);
+
+    ProtocolParty<T> ss(fieldType);
+    generated_shares = ss.generate_shares(m_secrets[0], 6, 1, 1);   // generalise this later and use the argument of the function
+
+    party_t & peer(m_party_states[m_id]);
+
+    peer.shares_rcvd.insert(peer.shares_rcvd.end(), generated_shares.data(), generated_shares.data() + generated_shares.size());
+
+//	if(RAND_bytes(seed.data(), 16))
+//	{
+//		if(0 == (result = commit_seed(id, seed, commit)))
+//			LC.debug("%s: %lu data generated.", __FUNCTION__, id);
+//		else
+//			LC.error("%s: commit_seed() failed.", __FUNCTION__);
+//	}
+//	else
+//		LC.error("%s: RAND_bytes() failed.", __FUNCTION__);
 	return result;
 }
 
-int cc_coin_toss::commit_seed(const size_t id, const std::vector<u_int8_t> & seed, std::vector<u_int8_t> & commit) const
+// reconstruct from all the shares received and check consistency
+template <class T>
+int cc_coin_toss<T>::valid_shares() const
 {
-	int result = -1;
-	EVP_MD_CTX ctx;
-	EVP_MD_CTX_init(&ctx);
-	const EVP_MD * md = EVP_sha256();
-	if(EVP_DigestInit_ex(&ctx, md, NULL))
-	{
-		if(EVP_DigestUpdate(&ctx, &id, sizeof(id)))
-		{
-			if(EVP_DigestUpdate(&ctx, seed.data(), seed.size()))
-			{
-				unsigned int digest_size = 0;
-				commit.resize(SHA256_BYTE_SIZE);
-				if(EVP_DigestFinal_ex(&ctx, commit.data(), &digest_size))
-				{
-					if(SHA256_BYTE_SIZE == digest_size)
-					{
-						result = 0;
-						LC.info("%s: seed committed by SHA256 hash.", __FUNCTION__);
-					}
-					else
-						LC.error("%s: digest size %u mismatch SHA256 size %u.", __FUNCTION__, digest_size, SHA256_BYTE_SIZE);
-				}
-				else
-					LC.error("%s: EVP_DigestFinal_ex() failed.", __FUNCTION__);
-			}
-			else
-				LC.error("%s: EVP_DigestUpdate(seed) failed.", __FUNCTION__);
-		}
-		else
-			LC.error("%s: EVP_DigestUpdate(id) failed.", __FUNCTION__);
-	}
-	else
-		LC.error("%s: EVP_DigestInit_ex() failed.", __FUNCTION__);
-	EVP_MD_CTX_cleanup(&ctx);
-	return result;
+    vector<T> recons;
+    ProtocolParty<T> ss(fieldType);
+    recons = ss.reconstruct(sum_shares, 1);
+
 }
 
-int cc_coin_toss::valid_seed(const size_t id, const std::vector<u_int8_t> & seed, const std::vector<u_int8_t> & commit) const
-{
-	std::vector<u_int8_t> control_commit;
-	commit_seed(id, seed, control_commit);
-	if(0 == memcmp(control_commit.data(), commit.data(), SHA256_BYTE_SIZE))
-		return 0;
-	return -1;
-}
-
-void cc_coin_toss::handle_party_conn(const size_t party_id, const bool connected)
+template <class T>
+void cc_coin_toss<T>::handle_party_conn(const size_t party_id, const bool connected)
 {
 	party_t & peer(m_party_states[party_id]);
 
@@ -169,11 +150,11 @@ void cc_coin_toss::handle_party_conn(const size_t party_id, const bool connected
 	{
 		bool OK =
 		(
-				(m_toss_outcomes.size() == m_rounds)
-				||
-				(m_toss_outcomes.size() == (m_rounds - 1) && peer.state > ps_seed_sent)
-				||
-				(m_toss_outcomes.size() == (m_rounds - 1) && peer.state == ps_seed_sent && SEED_BYTE_SIZE <= (peer.seed.size() + peer.data.size()))
+				(m_secrets.size() == m_rounds)
+				//(m_secrets.size() == (m_rounds - 1) && peer.state > ps_share_for_recon_sent)
+        //      modify condition so that seed byte size is parameterised to the share size (8 for M31 and 16 for M61)
+//				||
+//				(m_secrets.size() == (m_rounds - 1) && peer.state == ps_share_for_recon_sent && SEED_BYTE_SIZE <= (peer.seed.size() + peer.data.size()))
 		);
 
 		if(!OK)
@@ -188,13 +169,16 @@ void cc_coin_toss::handle_party_conn(const size_t party_id, const bool connected
 	}
 }
 
-void cc_coin_toss::handle_party_msg(const size_t party_id, std::vector< u_int8_t > & msg)
+template <class T>
+void cc_coin_toss<T>::handle_party_msg(const size_t party_id, std::vector< T > & msg)
 {
 	party_t & peer(m_party_states[party_id]);
+//  insert the received data into the buffer "data"
 	peer.data.insert(peer.data.end(), msg.data(), msg.data() + msg.size());
 }
 
-bool cc_coin_toss::run_around()
+template <class T>
+bool cc_coin_toss<T>::run_around()
 {
 	bool round_ready = true;
 	for(size_t pid = 0; pid < m_parties; ++pid)
@@ -205,7 +189,9 @@ bool cc_coin_toss::run_around()
 	return round_ready;
 }
 
-bool cc_coin_toss::party_run_around(const size_t party_id)
+
+template <class T>
+bool cc_coin_toss<T>::party_run_around(const size_t party_id)
 {
 	party_t & peer(m_party_states[party_id]);
 	party_t & self(m_party_states[m_id]);
@@ -214,72 +200,84 @@ bool cc_coin_toss::party_run_around(const size_t party_id)
 	case ps_nil:
 		return false;
 	case ps_connected:
-		if(0 != m_cc->send(party_id, self.commit.data(), self.commit.size()))
+		if(0 != m_cc->send(party_id, self.shares_rcvd[party_id], SHARE_BYTE_SIZE))
 		{
-			LC.error("%s: party id %lu commit send failure; toss failed.", __FUNCTION__, party_id);
+			LC.error("%s: party id %lu share send failure.", __FUNCTION__, party_id);
 			return (m_run_flag = false);
 		}
 		else
-			peer.state = ps_commit_sent;
+			peer.state = ps_shares_sent;
 			/* no break */
-	case ps_commit_sent:
-		if(peer.commit.size() < SHA256_BYTE_SIZE)
+
+	case ps_first_round_up:
+
+	    peer.state = ps_send_sum_share;
+
+	case ps_send_sum_share:
+	    if(0 != m_cc->send(party_id, sum, SHARE_BYTE_SIZE)) {
+            LC.error("%s: party id %lu share send failure.", __FUNCTION__, party_id);
+            return (m_run_flag = false);
+	    }
+	    else {
+	        peer.state = ps_receive_sum_share;
+	    }
+
+	case ps_receive_sum_share:
+        if(sum_shares.size() < SHARE_BYTE_SIZE)      // write an if condition and check according to fieldType
+        {
+            if(!peer.data.empty())
+            {
+                size_t chunk_size = SHARE_BYTE_SIZE;
+                //if(peer.data.size() < chunk_size) chunk_size = peer.data.size();
+                sum_shares.insert(sum_shares.end(), peer.data.data(), peer.data.data() + chunk_size);
+                peer.data.erase(peer.data.begin(), peer.data.begin() + chunk_size);
+            }
+
+            if(sum_shares.size() < SHARE_BYTE_SIZE)
+                return false;//wait for more data
+        }
+        if(valid_shares()) {
+            peer.state = ps_round_up;
+        }
+
+
+	case ps_shares_sent:
+		if(peer.shares_rcvd.size() < SHARE_BYTE_SIZE)      // write an if condition and check according to fieldType
 		{
 			if(!peer.data.empty())
 			{
-				size_t chunk_size = SHA256_BYTE_SIZE - peer.commit.size();
-				if(peer.data.size() < chunk_size) chunk_size = peer.data.size();
-				peer.commit.insert(peer.commit.end(), peer.data.data(), peer.data.data() + chunk_size);
+				size_t chunk_size = SHARE_BYTE_SIZE;
+				//if(peer.data.size() < chunk_size) chunk_size = peer.data.size();
+				peer.shares_rcvd.insert(peer.shares_rcvd.end(), peer.data.data(), peer.data.data() + chunk_size);
 				peer.data.erase(peer.data.begin(), peer.data.begin() + chunk_size);
 			}
 
-			if(peer.commit.size() < SHA256_BYTE_SIZE)
+			if(peer.shares_rcvd.size() < SHARE_BYTE_SIZE)
 				return false;//wait for more data
 		}
-		peer.state = ps_commit_rcvd;
+		peer.state = ps_first_round_up;
 		/* no break */
-	case ps_commit_rcvd:
-		if(0 != m_cc->send(party_id, self.seed.data(), self.seed.size()))
-		{
-			LC.error("%s: party id %lu seed send failure; toss failed.", __FUNCTION__, party_id);
-			return (m_run_flag = false);
-		}
-		peer.state = ps_seed_sent;
-		/* no break */
-	case ps_seed_sent:
-		if(peer.seed.size() < SEED_BYTE_SIZE)
-		{
-			if(!peer.data.empty())
-			{
-				size_t chunk_size = SEED_BYTE_SIZE - peer.seed.size();
-				if(peer.data.size() < chunk_size) chunk_size = peer.data.size();
-				peer.seed.insert(peer.seed.end(), peer.data.data(), peer.data.data() + chunk_size);
-				peer.data.erase(peer.data.begin(), peer.data.begin() + chunk_size);
-			}
-
-			if(peer.seed.size() < SEED_BYTE_SIZE)
-				return false;//wait for more data
-		}
-		peer.state = ps_seed_rcvd;
-		/* no break */
-	case ps_seed_rcvd:
-		if(0 != valid_seed(party_id, peer.seed, peer.commit))
-		{
-			LC.error("%s: party id %lu seed invalid; toss failed.", __FUNCTION__, party_id);
-			return (m_run_flag = false);
-		}
-		peer.state = ps_round_up;
-		/* no break */
+	    return true;
 	case ps_round_up:
 		return true;
 	default:
 		LC.error("%s: invalid party state value %u.", __FUNCTION__, peer.state);
 		exit(__LINE__);
 	}
+
 }
 
-bool cc_coin_toss::round_up()
+template <class T>
+bool cc_coin_toss<T>::round_up()
 {
+    int pid =0;
+    if(ps_first_round_up==m_party_states[pid].state){
+        for (int i = 0; i < m_party_states.size(); i++) {
+            party_t & peer2(m_party_states[i]);
+            sum = sum + peer2.shares_rcvd.data();
+        }
+        sum_shares.push_back(sum);
+    }
 	for(size_t pid = 0; pid < m_parties; ++pid)
 	{
 		if(pid == m_id) continue;
@@ -287,28 +285,28 @@ bool cc_coin_toss::round_up()
 			return false;
 	}
 
-	std::vector<u_int8_t> toss(SEED_BYTE_SIZE, 0);
-	for(size_t pid = 0; pid < m_parties; ++pid)
-	{
-		for(size_t j = 0; j < SEED_BYTE_SIZE; ++j)
-			toss[j] ^= m_party_states[pid].seed[j];
-		m_party_states[pid].commit.clear();
-		m_party_states[pid].seed.clear();
-		m_party_states[pid].state = ps_connected;
-	}
+//	std::vector<u_int8_t> toss(SHARE_BYTE_SIZE, 0);
+//	for(size_t pid = 0; pid < m_parties; ++pid)
+//	{
+//		for(size_t j = 0; j < SHARE_BYTE_SIZE; ++j)
+//			toss[j] ^= m_party_states[pid].seed[j];
+//		m_party_states[pid].commit.clear();
+//		m_party_states[pid].seed.clear();
+//		m_party_states[pid].state = ps_connected;
+//	}
 
-	m_toss_outcomes.push_back(toss);
-	if(m_toss_outcomes.size() == m_rounds)
-	{
-		LC.notice("%s: done tossing; all results are in.", __FUNCTION__);
-		return (m_run_flag = false);
-	}
+//	m_toss_outcomes.push_back(toss);
+//	if(m_toss_outcomes.size() == m_rounds)
+//	{
+//		LC.notice("%s: done tossing; all results are in.", __FUNCTION__);
+//		return (m_run_flag = false);
+//	}
 
-	if(0 != generate_data(m_id, m_party_states[m_id].seed, m_party_states[m_id].commit))
-	{
-		LC.error("%s: self data generation failed; toss failure.", __FUNCTION__);
-		exit(__LINE__);
-	}
+//	if(0 != generate_data(m_id, m_party_states[m_id].seed, m_party_states[m_id].commit))
+//	{
+//		LC.error("%s: self data generation failed; toss failure.", __FUNCTION__);
+//		exit(__LINE__);
+//	}
 
 	return true;
 }

@@ -1,26 +1,31 @@
 
 #pragma once
 
+template <class T>
 class cc_coin_toss : public ac_protocol
 {
 	size_t m_rounds;
-	std::list< std::vector< u_int8_t > > m_toss_outcomes;
+	std::vector <T> m_secrets;
+	std::vector <T> generated_shares;
+	std::string fieldType;
+	T sum;
+	std::vector<T> sum_shares;
 
 	typedef enum
 	{
 		ps_nil = 0,
 		ps_connected,
-		ps_commit_sent,
-		ps_commit_rcvd,
-		ps_seed_sent,
-		ps_seed_rcvd,
+		ps_shares_sent,
+        ps_send_sum_share,
+        ps_receive_sum_share,
+        ps_first_round_up,
 		ps_round_up
 	}party_state_t;
 
 	typedef struct __party_t
 	{
 		party_state_t state;
-		std::vector< u_int8_t > data, commit, seed;
+		std::vector< T > data, shares_rcvd, secrets;
 		__party_t():state(ps_nil){}
 	}party_t;
 
@@ -35,9 +40,9 @@ class cc_coin_toss : public ac_protocol
 	bool round_up();
 	int post_run();
 
-	int generate_data(const size_t id, std::vector<u_int8_t> & seed, std::vector<u_int8_t> & commit) const;
-	int commit_seed(const size_t id, const std::vector<u_int8_t> & seed, std::vector<u_int8_t> & commit) const;
-	int valid_seed(const size_t id, const std::vector<u_int8_t> & seed, const std::vector<u_int8_t> & commit) const;
+	int generate_data(std::vector<T>&) const;
+
+	int valid_shares() const;
 
 public:
 	cc_coin_toss(const comm_client_factory::client_type_t cc_type, comm_client::cc_args_t * cc_args);
@@ -45,3 +50,4 @@ public:
 
 	int run(const size_t id, const size_t parties, const char * conf_file, const size_t rounds, const size_t idle_timeout_seconds);
 };
+

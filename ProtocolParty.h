@@ -40,13 +40,16 @@ private:
 
     VDM<FieldType> matrix_vand;
 
+    vector<FieldType> shares;
+    vector<FieldType> secrets;
+
 
 public:
-    ProtocolParty(int argc, char* argv []);
+    ProtocolParty(string);
 
     vector<FieldType> reconstruct(vector<FieldType>, vector<FieldType>, vector<FieldType>);
     vector<FieldType> reconstruct(vector<FieldType>, vector<FieldType>);
-    vector<FieldType> reconstruct(vector<FieldType>, int);
+    vector<FieldType> reconstruct(vector<FieldType>, int, int);
     vector<FieldType> generate_shares(vector<FieldType>, vector<FieldType>, int);
     vector<FieldType> generate_shares(vector<FieldType>, int, int, int);
     ~ProtocolParty();
@@ -54,9 +57,9 @@ public:
 
 
 template <class FieldType>
-ProtocolParty<FieldType>::ProtocolParty(int argc, char* argv [])
+ProtocolParty<FieldType>::ProtocolParty(string field)
 {
-    fieldType = argv[1];
+    fieldType = field;
     if(fieldType.compare("Mersenne31") == 0) {
         field = new TemplateField<FieldType>(2147483647);
     } else if(fieldType.compare("Mersenne61") == 0) {
@@ -105,10 +108,11 @@ vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> alpha,
     matrix_for_interpolate.allocate(beta.size(),alpha.size(), field); // might need to change to l
 
     matrix_for_interpolate.InitHIMByVectors(alpha, beta);
-    vector<FieldType> secret;
-    matrix_for_interpolate.MatrixMult(y, secret);
+//    vector<FieldType> secret;
+    matrix_for_interpolate.MatrixMult(y, secrets);
+ //   this->secret = secret;
 
-    return secret;
+    return secrets;
 }
 
 template <class FieldType>
@@ -130,7 +134,7 @@ vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares
 
 
     matrix_for_interpolate.InitHIMByVectors(alpha, beta);
-    vector<FieldType> secrets;
+//    vector<FieldType> secrets;
     secrets.resize(beta.size());
     matrix_for_interpolate.MatrixMult(shares, secrets);
     return secrets;
@@ -138,11 +142,11 @@ vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares
 
 
 template <class FieldType>
-vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares, int l )
+vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares, int l, int d )
 {
 
     vector<FieldType> beta;
-    beta.resize(l);
+    beta.resize(l+shares.size()-(d+1));
 
     unsigned long p;
     if(fieldType.compare("Mersenne31")==0){
@@ -157,23 +161,34 @@ vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares
     {
         beta[i]=field->GetElement(p-i);
     }
+    for(int i=0; i<shares.size()-(d+1); i++){
+        beta[i+l]=field->GetElement(i+d+2);
+    }
 
-    matrix_for_interpolate.allocate(beta.size(),shares.size(), field); // might need to change to l
+   //matrix_for_interpolate.allocate(beta.size(),shares.size(), field); // might need to change to l
+    matrix_for_interpolate.allocate(beta.size(),d+1, field); // might need to change to l
 
     vector<FieldType> alpha;
-    alpha.resize(shares.size());
+    alpha.resize(d+1);
 
     // N distinct non-zero field elements
-    for(int i=0; i<shares.size(); i++)
+    for(int i=0; i<d+1; i++)
     {
         alpha[i]=field->GetElement(i+1);
     }
 
 
     matrix_for_interpolate.InitHIMByVectors(alpha, beta);
-    vector<FieldType> secrets;
+    //vector<FieldType> secrets;
     secrets.resize(beta.size());
+
     matrix_for_interpolate.MatrixMult(shares, secrets);
+    for(int i=0; i<shares.size()-(d+1); i++){
+        if(secrets[i+l]!=shares[i]){
+            cout<<"BADDDDD"<<endl;
+        }
+    }
+    secrets.resize(l);
     return secrets;
 }
 
@@ -193,7 +208,7 @@ vector<FieldType> ProtocolParty<FieldType>::generate_shares(vector<FieldType> se
 
     }
 
-    vector<FieldType> shares;
+    //vector<FieldType> shares;
     shares.resize(3);
     matrix_vand.MatrixMult(x1, shares, N);
 
@@ -270,7 +285,7 @@ vector<FieldType> ProtocolParty<FieldType>::generate_shares(vector<FieldType> se
     matrix_for_construction.allocate(beta.size(),alpha.size(), field);
     matrix_for_construction.InitHIMByVectors(alpha, beta);
 
-    vector<FieldType> shares;
+    //vector<FieldType> shares;
     shares.resize(N);
     matrix_for_construction.MatrixMult(x1, shares);
 
