@@ -4,12 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/parallels/ACP/coin_toss/GF2_8LookupTable.cpp" "/home/parallels/ACP/coin_toss/CMakeFiles/cointoss.dir/GF2_8LookupTable.cpp.o"
-  "/home/parallels/ACP/coin_toss/TemplateField.cpp" "/home/parallels/ACP/coin_toss/CMakeFiles/cointoss.dir/TemplateField.cpp.o"
-  "/home/parallels/ACP/coin_toss/cc_coin_toss.cpp" "/home/parallels/ACP/coin_toss/CMakeFiles/cointoss.dir/cc_coin_toss.cpp.o"
-  "/home/parallels/ACP/coin_toss/cc_udp_test.cpp" "/home/parallels/ACP/coin_toss/CMakeFiles/cointoss.dir/cc_udp_test.cpp.o"
-  "/home/parallels/ACP/coin_toss/coin_toss_test.cpp" "/home/parallels/ACP/coin_toss/CMakeFiles/cointoss.dir/coin_toss_test.cpp.o"
-  "/home/parallels/ACP/coin_toss/coin_toss_tester.cpp" "/home/parallels/ACP/coin_toss/CMakeFiles/cointoss.dir/coin_toss_tester.cpp.o"
+  "/home/parallels/coin_toss/GF2_8LookupTable.cpp" "/home/parallels/coin_toss/CMakeFiles/cointoss.dir/GF2_8LookupTable.cpp.o"
+  "/home/parallels/coin_toss/TemplateField.cpp" "/home/parallels/coin_toss/CMakeFiles/cointoss.dir/TemplateField.cpp.o"
+  "/home/parallels/coin_toss/cc_coin_toss.cpp" "/home/parallels/coin_toss/CMakeFiles/cointoss.dir/cc_coin_toss.cpp.o"
+  "/home/parallels/coin_toss/cc_udp_test.cpp" "/home/parallels/coin_toss/CMakeFiles/cointoss.dir/cc_udp_test.cpp.o"
+  "/home/parallels/coin_toss/coin_toss_test.cpp" "/home/parallels/coin_toss/CMakeFiles/cointoss.dir/coin_toss_test.cpp.o"
+  "/home/parallels/coin_toss/coin_toss_tester.cpp" "/home/parallels/coin_toss/CMakeFiles/cointoss.dir/coin_toss_tester.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

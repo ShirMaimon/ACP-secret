@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/parallels/ACP/coin_toss"/>
+				<Option working_dir="/home/parallels/coin_toss"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/parallels/ACP/coin_toss"/>
+				<Option working_dir="/home/parallels/coin_toss"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/parallels/ACP/coin_toss"/>
+				<Option working_dir="/home/parallels/coin_toss"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="cointoss">
-				<Option output="/home/parallels/ACP/coin_toss/cointoss" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/parallels/ACP/coin_toss"/>
+				<Option output="/home/parallels/coin_toss/cointoss" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/parallels/coin_toss"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -50,17 +50,25 @@
 					<Add directory="/home/parallels/libscapi"/>
 					<Add directory="/home/parallels/libscapi/install/include/boost"/>
 					<Add directory="/home/parallels/ACP/comm_client"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 cointoss"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 cointoss"/>
+					<CompileFile command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="cointoss/fast">
-				<Option output="/home/parallels/ACP/coin_toss/cointoss" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/parallels/ACP/coin_toss"/>
+				<Option output="/home/parallels/coin_toss/cointoss" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/parallels/coin_toss"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -71,52 +79,60 @@
 					<Add directory="/home/parallels/libscapi"/>
 					<Add directory="/home/parallels/libscapi/install/include/boost"/>
 					<Add directory="/home/parallels/ACP/comm_client"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 cointoss/fast"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/parallels/ACP/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 cointoss/fast"/>
+					<CompileFile command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j3 -f &quot;/home/parallels/coin_toss/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/parallels/ACP/coin_toss/GF2_8LookupTable.cpp">
+		<Unit filename="/home/parallels/coin_toss/GF2_8LookupTable.cpp">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/GF2_8LookupTable.h">
+		<Unit filename="/home/parallels/coin_toss/GF2_8LookupTable.h">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/ProtocolParty.h">
+		<Unit filename="/home/parallels/coin_toss/ProtocolParty.h">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/TemplateField.cpp">
+		<Unit filename="/home/parallels/coin_toss/TemplateField.cpp">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/TemplateField.h">
+		<Unit filename="/home/parallels/coin_toss/TemplateField.h">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/cc_coin_toss.cpp">
+		<Unit filename="/home/parallels/coin_toss/cc_coin_toss.cpp">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/cc_coin_toss.h">
+		<Unit filename="/home/parallels/coin_toss/cc_coin_toss.h">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/cc_udp_test.cpp">
+		<Unit filename="/home/parallels/coin_toss/cc_udp_test.cpp">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/cc_udp_test.h">
+		<Unit filename="/home/parallels/coin_toss/cc_udp_test.h">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/coin_toss_test.cpp">
+		<Unit filename="/home/parallels/coin_toss/coin_toss_test.cpp">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/coin_toss_test.h">
+		<Unit filename="/home/parallels/coin_toss/coin_toss_test.h">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/coin_toss_tester.cpp">
+		<Unit filename="/home/parallels/coin_toss/coin_toss_tester.cpp">
 			<Option target="cointoss"/>
 		</Unit>
-		<Unit filename="/home/parallels/ACP/coin_toss/CMakeLists.txt">
+		<Unit filename="/home/parallels/coin_toss/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
