@@ -24,11 +24,11 @@
 #include "coin_toss_test.h"
 #include "cc_udp_test.h"
 
-void get_options(int argc, char *argv[], size_t & parties, std::string & conf_file, size_t & rounds, int & log_level);
+void get_options(int argc, char *argv[], size_t & parties, std::string & conf_file, size_t & rounds, int & log_level, int &field);
 void show_usage(const char * prog);
 void init_log(const char * a_log_file, const char * a_log_dir, const int log_level, const char * logcat);
 
-void run_comm_tcp_mesh_client_test_fork(const size_t parties, const std::string & conf_file, const size_t rounds, const int log_level);
+void run_comm_tcp_mesh_client_test_fork(const size_t parties, const std::string & conf_file, const size_t rounds, const int log_level, const int field);
 void run_comm_tcp_proxy_client_test_fork(const size_t parties, const std::string & conf_file, const size_t rounds, const int log_level);
 void run_comm_udp_test_fork(const size_t parties, const std::string & conf_file, const size_t rounds, const int log_level);
 
@@ -38,11 +38,13 @@ int main(int argc, char *argv[]) {
 	std::string conf_file;
 	int log_level = 500;//default = notice
 
-	get_options(argc, argv, parties, conf_file, rounds, log_level);
+	    int field;
+
+	get_options(argc, argv, parties, conf_file, rounds, log_level, field);
 
 	std::cout << "!!!Hello World!!!" << std::endl; // prints !!!Hello World!!!
 
-	run_comm_tcp_mesh_client_test_fork(parties, conf_file, rounds, log_level);
+	run_comm_tcp_mesh_client_test_fork(parties, conf_file, rounds, log_level, field);
 	//run_comm_tcp_proxy_client_test_fork(parties, conf_file, rounds, log_level);
 
 	return 0;
@@ -50,7 +52,7 @@ int main(int argc, char *argv[]) {
 
 //******************************************************************************************//
 
-void get_options(int argc, char *argv[], size_t & parties, std::string & conf_file, size_t & rounds, int & log_level)
+void get_options(int argc, char *argv[], size_t & parties, std::string & conf_file, size_t & rounds, int & log_level, int &field)
 {
 	if(argc == 1)
 	{
@@ -58,7 +60,7 @@ void get_options(int argc, char *argv[], size_t & parties, std::string & conf_fi
 		exit(0);
 	}
 	int opt;
-	while ((opt = getopt(argc, argv, "hn:f:r:l:")) != -1)
+	while ((opt = getopt(argc, argv, "hn:f:r:l:z:")) != -1)
 	{
 		switch (opt)
 		{
@@ -77,8 +79,11 @@ void get_options(int argc, char *argv[], size_t & parties, std::string & conf_fi
 		case 'l':
 			log_level = (int)strtol(optarg, NULL, 10);
 			break;
+		case 'z':
+		    field = (int)strtol(optarg, NULL, 10);
+		    break;
 		default:
-			std::cerr << "Invalid program arguments." << std::endl;
+			std::cerr << "Invalid program arguments"<< std::endl;
 			show_usage(argv[0]);
 			exit(__LINE__);
 		}
@@ -95,6 +100,7 @@ void show_usage(const char * prog)
 	std::cout << "-f   peer address file" << std::endl;
 	std::cout << "-r   number of rounds" << std::endl;
 	std::cout << "-l   log level [fatal=0,alert=100,critical=200,error=300,warning=400,notice=500(default),info=600,debug=700]" << std::endl;
+    std::cout << "-z   field (31 or 61)" << std::endl;
 }
 
 //******************************************************************************************//
@@ -136,7 +142,7 @@ void init_log(const char * a_log_file, const char * a_log_dir, const int log_lev
 
 //******************************************************************************************//
 
-void run_comm_tcp_mesh_client_test_fork(const size_t parties, const std::string & conf_file, const size_t rounds, const int log_level)
+void run_comm_tcp_mesh_client_test_fork(const size_t parties, const std::string & conf_file, const size_t rounds, const int log_level, const int field)
 {
 	pid_t cpid;
 	std::set<pid_t> children_of_the_revolution;
@@ -151,7 +157,7 @@ void run_comm_tcp_mesh_client_test_fork(const size_t parties, const std::string 
 			snprintf(log_category, 32, "ct.tmt.%03lu", i);
 			snprintf(log_file, 32, "coin_toss_test.%03lu.log", i);
 			init_log(log_file, "./logs", log_level, log_category);
-			test_tcp_mesh_coin_toss(i, parties, conf_file.c_str(), rounds, log_category);
+			test_tcp_mesh_coin_toss(i, parties, conf_file.c_str(), rounds, log_category, field);
 			exit(0);
 		case -1:
 			{

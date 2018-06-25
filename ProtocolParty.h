@@ -49,7 +49,7 @@ public:
 
     vector<FieldType> reconstruct(vector<FieldType>, vector<FieldType>, vector<FieldType>);
     vector<FieldType> reconstruct(vector<FieldType>, vector<FieldType>);
-    vector<FieldType> reconstruct(vector<FieldType>, int, int);
+    bool reconstruct(vector<FieldType>, int, int);
     vector<FieldType> generate_shares(vector<FieldType>, vector<FieldType>, int);
     vector<FieldType> generate_shares(vector<FieldType>, int, int, int);
     ~ProtocolParty();
@@ -57,9 +57,9 @@ public:
 
 
 template <class FieldType>
-ProtocolParty<FieldType>::ProtocolParty(string field)
+ProtocolParty<FieldType>::ProtocolParty(string field1)
 {
-    fieldType = field;
+    fieldType = field1;
     if(fieldType.compare("Mersenne31") == 0) {
         field = new TemplateField<FieldType>(2147483647);
     } else if(fieldType.compare("Mersenne61") == 0) {
@@ -142,7 +142,7 @@ vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares
 
 
 template <class FieldType>
-vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares, int l, int d )
+bool ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares, int l, int d )
 {
 
     vector<FieldType> beta;
@@ -185,11 +185,11 @@ vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares
     matrix_for_interpolate.MatrixMult(shares, secrets);
     for(int i=0; i<shares.size()-(d+1); i++){
         if(secrets[i+l]!=shares[i]){
-            cout<<"BADDDDD"<<endl;
+            return false;
         }
     }
     secrets.resize(l);
-    return secrets;
+    return true;
 }
 
 template <class FieldType>
