@@ -173,7 +173,7 @@ int cc_coin_toss<T>::generate_data(std::vector<T>& secret)
     //m_secrets.push_back(2000);
 
     ProtocolParty<T> ss(fieldType);
-    generated_shares = ss.generate_shares(m_secrets, 6, 2, 2);   // generalise this later and use the argument of the function
+    generated_shares = ss.generate_shares(m_secrets, 200, 30, 25);   // generalise this later and use the argument of the function
 
 
 
@@ -194,7 +194,7 @@ bool cc_coin_toss<T>::valid_shares()
         party_t &peer(m_party_states[i]);
         sum_shares[i] = peer.received_sum_shares[0];
     }
-    recons = ss.reconstruct(sum_shares, 2, 3);
+    recons = ss.reconstruct(sum_shares, 30, 54);
     secrets=ss.secrets;
     return recons;
 }
