@@ -3298,7 +3298,6 @@ CMakeFiles/cointoss.dir/cc_coin_toss.cpp.o
  /home/parallels/ACP/comm_client/comm_client.h
  /home/parallels/ACP/comm_client/comm_client_cb_api.h
  /home/parallels/ACP/comm_client/comm_client_factory.h
- /home/parallels/ACP/comm_client/lfq.h
  /home/parallels/coin_toss/ProtocolParty.h
  /home/parallels/coin_toss/cc_coin_toss.cpp
  /home/parallels/coin_toss/cc_coin_toss.h
@@ -4988,7 +4987,6 @@ CMakeFiles/cointoss.dir/coin_toss_test.cpp.o
  /home/parallels/ACP/comm_client/comm_client.h
  /home/parallels/ACP/comm_client/comm_client_cb_api.h
  /home/parallels/ACP/comm_client/comm_client_factory.h
- /home/parallels/ACP/comm_client/lfq.h
  /home/parallels/coin_toss/ProtocolParty.h
  /home/parallels/coin_toss/TemplateField.h
  /home/parallels/coin_toss/cc_coin_toss.h

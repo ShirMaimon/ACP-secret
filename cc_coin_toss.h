@@ -115,11 +115,7 @@ int cc_coin_toss<T>::run(const size_t id, const size_t parties, const char * con
     LC.notice("%s: running protocol.", __FUNCTION__);
     m_rounds = rounds;
 
-    for(int i = 0; i < m_rounds; i ++) {
-        ac_protocol::run_ac_protocol(id, parties, conf_file, idle_timeout_seconds);
-    }
-
-    return 1;
+    return ac_protocol::run_ac_protocol(id, parties, conf_file, idle_timeout_seconds);;
 }
 
 template <class T>
@@ -336,7 +332,6 @@ bool cc_coin_toss<T>::party_run_around(const size_t party_id)
                     peer.data.erase(peer.data.begin(), peer.data.begin() + chunk_size);
                 }
             else{
-                LC.info("%s: its empty :(", __FUNCTION__);
                 return false;
             }
             if(peer.shares_bytes.size() < share_size) {
