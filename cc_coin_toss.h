@@ -135,8 +135,6 @@ int cc_coin_toss<T>::pre_run()
     vector<T> s;
     generate_data(s);
 
-    // Rewrite to generate randomness for packed multiplication
-
     return 0;
 }
 
@@ -180,17 +178,6 @@ int cc_coin_toss<T>::generate_data(std::vector<T>& secret)
 
     self.received_shares[0] = generated_shares[m_id];
 
-    //peer.received_shares.insert(peer.received_shares.end(), generated_shares.data()+m_id, generated_shares.data() + (m_id+1));
-
-//	if(RAND_bytes(seed.data(), 16))
-//	{
-//		if(0 == (result = commit_seed(id, seed, commit)))
-//			LC.debug("%s: %lu data generated.", __FUNCTION__, id);
-//		else
-//			LC.error("%s: commit_seed() failed.", __FUNCTION__);
-//	}
-//	else
-//		LC.error("%s: RAND_bytes() failed.", __FUNCTION__);
     return result;
 }
 
@@ -199,7 +186,7 @@ bool cc_coin_toss<T>::valid_shares()
 {
     bool recons;
     ProtocolParty<T> ss(fieldType);
-    //write for loop
+
     vector<T> sum_shares;
     sum_shares.resize(m_party_states.size());
     for (int i = 0; i < m_party_states.size(); i++) {
