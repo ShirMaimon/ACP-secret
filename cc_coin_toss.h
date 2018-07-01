@@ -31,18 +31,18 @@
 #include "ProtocolParty.h"
 #pragma once
 
-#define SHARE_BYTE_SIZE		8
 #define LC log4cpp::Category::getInstance(m_logcat)
 
 template <class T>
 class cc_coin_toss : public ac_protocol
 {
 	size_t m_rounds;
-	std::vector <T> m_secrets;
-	std::vector <T> generated_shares;
+	int share_size;
+	std::vector <T> m_secrets, generated_shares;
+	vector<unsigned char> random_bytes;
 	std::string fieldType;
-	T sum;
-	std::vector<T> sum_shares;
+	T sum=0;
+    TemplateField<T> * temp;
 
 	typedef enum
 	{
@@ -58,7 +58,8 @@ class cc_coin_toss : public ac_protocol
 	typedef struct __party_t
 	{
 		party_state_t state;
-		std::vector< T > data, shares_rcvd, secrets;
+		vector<unsigned char> shares_bytes, received_shares_bytes, sum_shares_bytes, data;
+		std::vector< T > received_shares, received_sum_shares;
 		__party_t():state(ps_nil){}
 	}party_t;
 
@@ -73,9 +74,11 @@ class cc_coin_toss : public ac_protocol
 	bool round_up();
 	int post_run();
 
-	int generate_data(std::vector<T>&) const;
+	int generate_data(std::vector<T>&);
 
-	bool valid_shares() const;
+	vector<T> secrets;
+
+	bool valid_shares();
 
 public:
 	cc_coin_toss(const comm_client_factory::client_type_t cc_type, comm_client::cc_args_t * cc_args, std::string field);
@@ -91,6 +94,14 @@ cc_coin_toss<T>::cc_coin_toss(const comm_client_factory::client_type_t cc_type, 
     : ac_protocol(cc_type, cc_args), m_rounds(0)
 {
     fieldType = field;
+    if(!fieldType.compare("Mersenne31")) {
+        share_size = 8;
+        temp = new TemplateField<T>(2147483647);
+    }
+    else {
+        share_size = 16;
+        temp = new TemplateField<T>(0);
+    }
 }
 
 template <class T>
@@ -113,51 +124,63 @@ int cc_coin_toss<T>::pre_run()
     m_party_states.clear();
     m_party_states.resize(m_parties);
 
+    for(int i = 0; i < m_party_states.size(); i++) {
+        party_t &peer(m_party_states[i]);
+        peer.shares_bytes.resize(share_size);
+
+    }
+
+    generated_shares.resize(m_party_states.size());
+
+    vector<T> s;
+    generate_data(s);
+
     // Rewrite to generate randomness for packed multiplication
 
-//	if(0 != generate_data(m_id, m_party_states[m_id].seed, m_party_states[m_id].commit))
-//	{
-//		LC.error("%s: self data generation failed; toss failure.", __FUNCTION__);
-//		return -1;
-//	}
     return 0;
 }
 
 template <class T>
 int cc_coin_toss<T>::post_run()
 {
-//	m_party_states.clear();
-//
-//	if(m_secrets.size() != m_rounds)
-//	{
-//		LC.error("%s: invalid number of toss results %lu out of %lu; toss failure.", __FUNCTION__, m_secrets.size(), m_rounds);
-//		return -1;
-//	}
-//	size_t round = 0;
-//	for(std::list< std::vector< u_int8_t > >::const_iterator toss = m_secrets.begin(); toss != m_secrets.end(); ++toss, ++round)
-//	{
-//		LC.info("%s: toss result %lu = <%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X>",
-//				__FUNCTION__, round,
-//				(*toss)[0], (*toss)[1], (*toss)[2], (*toss)[3], (*toss)[4], (*toss)[5], (*toss)[6], (*toss)[7],
-//				(*toss)[8], (*toss)[9], (*toss)[10], (*toss)[11], (*toss)[12], (*toss)[13], (*toss)[14], (*toss)[15]);
-//	}
+
+    if(!valid_shares()){
+        LC.info("%s: shares not valid", __FUNCTION__);
+    }else{
+        LC.info("%s: shares valid", __FUNCTION__);
+    }
+
     return 0;
 }
 
 // change function to generate shares of a random value
 template <class T>
-int cc_coin_toss<T>::generate_data(std::vector<T>& secret) const
+int cc_coin_toss<T>::generate_data(std::vector<T>& secret)
 {
     int result = -1;
-    m_secrets.push_back(1000);
+    T s = 1000;
+    m_secrets.resize(2);
+//    m_secrets[0] = s;
+//    m_secrets[1] = s;
+    random_bytes.resize(8);
+    RAND_bytes(random_bytes.data(), 8);
+    m_secrets[0] = temp->bytesToElement(&random_bytes[0]);
+    random_bytes.clear();
+    RAND_bytes(random_bytes.data(), 8);
+    m_secrets[1] = temp->bytesToElement(&random_bytes[0]);
+
+    party_t & self(m_party_states[m_id]);
+    self.received_shares.resize(2);
     //m_secrets.push_back(2000);
 
     ProtocolParty<T> ss(fieldType);
-    generated_shares = ss.generate_shares(m_secrets[0], 6, 1, 2);   // generalise this later and use the argument of the function
+    generated_shares = ss.generate_shares(m_secrets, 6, 2, 2);   // generalise this later and use the argument of the function
 
-    party_t & peer(m_party_states[m_id]);
 
-    peer.shares_rcvd.insert(peer.shares_rcvd.end(), generated_shares.data(), generated_shares.data() + generated_shares.size());
+
+    self.received_shares[0] = generated_shares[m_id];
+
+    //peer.received_shares.insert(peer.received_shares.end(), generated_shares.data()+m_id, generated_shares.data() + (m_id+1));
 
 //	if(RAND_bytes(seed.data(), 16))
 //	{
@@ -171,13 +194,20 @@ int cc_coin_toss<T>::generate_data(std::vector<T>& secret) const
     return result;
 }
 
-// reconstruct from all the shares received and check consistency
 template <class T>
-bool cc_coin_toss<T>::valid_shares() const
+bool cc_coin_toss<T>::valid_shares()
 {
     bool recons;
     ProtocolParty<T> ss(fieldType);
-    recons = ss.reconstruct(sum_shares, 1, 2);
+    //write for loop
+    vector<T> sum_shares;
+    sum_shares.resize(m_party_states.size());
+    for (int i = 0; i < m_party_states.size(); i++) {
+        party_t &peer(m_party_states[i]);
+        sum_shares[i] = peer.received_sum_shares[0];
+    }
+    recons = ss.reconstruct(sum_shares, 2, 3);
+    secrets=ss.secrets;
     return recons;
 }
 
@@ -245,39 +275,20 @@ bool cc_coin_toss<T>::party_run_around(const size_t party_id)
 {
     party_t & peer(m_party_states[party_id]);
     party_t & self(m_party_states[m_id]);
-    T elem = self.shares_rcvd[party_id];
-    unsigned char * shares_rcvd_bytes, *sum_bytes;
-    if(fieldType.compare("Mersenne31")) {
-        memcpy(shares_rcvd_bytes, (byte*)(&elem), 4);
-        memcpy(sum_bytes, (byte*)(&sum), 4);
-    }
-    else {
-        memcpy(shares_rcvd_bytes, (byte*)(&elem), 8);
-        memcpy(sum_bytes, (byte*)(&sum), 8);
-    }
+    self.shares_bytes.resize(1);
+    self.sum_shares_bytes.resize(1);
 
-
+    unsigned char* thing;
     switch(peer.state)
     {
         case ps_nil:
             return false;
-        case ps_connected:
-
-            if(0 != m_cc->send(party_id, shares_rcvd_bytes, SHARE_BYTE_SIZE))
-            {
-                LC.error("%s: party id %lu share send failure.", __FUNCTION__, party_id);
-                return (m_run_flag = false);
-            }
-            else
-                peer.state = ps_shares_sent;
-            /* no break */
-
-        case ps_first_round_up:
-
-            peer.state = ps_send_sum_share;
 
         case ps_send_sum_share:
-            if(0 != m_cc->send(party_id, sum_bytes, SHARE_BYTE_SIZE)) {
+            LC.info("%s: reached sending sum share %lu", __FUNCTION__, party_id);
+            temp->elementToBytes(&self.sum_shares_bytes[0], self.received_sum_shares[0]);
+
+            if(0 != m_cc->send(party_id, &self.sum_shares_bytes[0], share_size)) {
                 LC.error("%s: party id %lu share send failure.", __FUNCTION__, party_id);
                 return (m_run_flag = false);
             }
@@ -286,42 +297,66 @@ bool cc_coin_toss<T>::party_run_around(const size_t party_id)
             }
 
         case ps_receive_sum_share:
-            if(sum_shares.size() < SHARE_BYTE_SIZE)      // write an if condition and check according to fieldType
-            {
-                if(!peer.data.empty())
+            if(!peer.data.empty())
                 {
-                    size_t chunk_size = SHARE_BYTE_SIZE;
+                    size_t chunk_size = share_size;
                     //if(peer.data.size() < chunk_size) chunk_size = peer.data.size();
-                    sum_shares.insert(sum_shares.end(), peer.data.data(), peer.data.data() + chunk_size);
+                    peer.sum_shares_bytes.insert(peer.sum_shares_bytes.end(), peer.data.data(), peer.data.data() + chunk_size);
+                    T elem;
+                    elem = temp->bytesToElement(&peer.sum_shares_bytes[0]);
+                    //peer.received_shares.erase(peer.received_shares.begin(), peer.received_shares.end());
+                    peer.received_sum_shares.insert(peer.received_sum_shares.end(), elem);
                     peer.data.erase(peer.data.begin(), peer.data.begin() + chunk_size);
                 }
-
-                if(sum_shares.size() < SHARE_BYTE_SIZE)
+                if(peer.sum_shares_bytes.size() < share_size)       // FIX THIS AND MAKE IT WORK
                     return false;//wait for more data
-            }
-            if(valid_shares()) {
-                peer.state = ps_round_up;
-            }
 
+            peer.state=ps_round_up;
+        case ps_round_up:
+            return true;
+        case ps_connected:
 
+            temp->elementToBytes(&peer.shares_bytes[0], generated_shares[party_id]);
+            LC.info("%s: reached connected %lu", __FUNCTION__, party_id);
+            LC.info("%s: sending %lu to party %d",__FUNCTION__, peer.shares_bytes[0], party_id);
+            if(0 != m_cc->send(party_id, &peer.shares_bytes[0], share_size))
+            {
+                LC.error("%s: party id %lu share send failure.", __FUNCTION__, party_id);
+                return (m_run_flag = false);
+            }
+            else {
+                LC.error("%s: party id %lu share send NOT failure.", __FUNCTION__, party_id);
+                peer.state = ps_shares_sent;
+            }
         case ps_shares_sent:
-            if(peer.shares_rcvd.size() < SHARE_BYTE_SIZE)      // write an if condition and check according to fieldType
-            {
-                if(!peer.data.empty())
+            LC.info("%s: reached shares sent %lu", __FUNCTION__, party_id);
+            if(!peer.data.empty())
                 {
-                    size_t chunk_size = SHARE_BYTE_SIZE;
+                    size_t chunk_size = share_size;
                     //if(peer.data.size() < chunk_size) chunk_size = peer.data.size();
-                    peer.shares_rcvd.insert(peer.shares_rcvd.end(), peer.data.data(), peer.data.data() + chunk_size);
+
+                    peer.received_shares_bytes.insert(peer.received_shares_bytes.end(), peer.data.data(), peer.data.data() + chunk_size);
+                    T elem;
+                    elem = temp->bytesToElement(&peer.received_shares_bytes[0]);
+                    //peer.received_shares.erase(peer.received_shares.begin(), peer.received_shares.end());
+                    LC.debug("%s: receiving share %lu from party %d", __FUNCTION__, peer.received_shares_bytes[0], party_id);
+                    peer.received_shares.insert(peer.received_shares.end(), elem);
                     peer.data.erase(peer.data.begin(), peer.data.begin() + chunk_size);
                 }
-
-                if(peer.shares_rcvd.size() < SHARE_BYTE_SIZE)
-                    return false;//wait for more data
+            else{
+                LC.info("%s: its empty :(", __FUNCTION__);
+                return false;
             }
+            if(peer.shares_bytes.size() < share_size) {
+                return false;
+            }
+
+
             peer.state = ps_first_round_up;
             /* no break */
+
             return true;
-        case ps_round_up:
+        case ps_first_round_up:
             return true;
         default:
             LC.error("%s: invalid party state value %u.", __FUNCTION__, peer.state);
@@ -333,43 +368,50 @@ bool cc_coin_toss<T>::party_run_around(const size_t party_id)
 template <class T>
 bool cc_coin_toss<T>::round_up()
 {
-    int pid =0;
-    if(ps_first_round_up==m_party_states[pid].state){
+    bool first_round = true, second_round = true;
+    LC.debug("%s: round up", __FUNCTION__);
+    for(int i = 0; i < m_party_states.size(); i++) {
+        if(i == m_id) continue;
+        if(ps_first_round_up != m_party_states[i].state){
+            first_round = false;
+            //
+        }
+
+    }
+
+    if(first_round) {
+        LC.debug("%s: yay first round is over", __FUNCTION__);
         for (int i = 0; i < m_party_states.size(); i++) {
             party_t & peer2(m_party_states[i]);
-            sum = sum + peer2.shares_rcvd[0];
+
+            LC.debug("%s made pointer to party %lu, value is %lu", __FUNCTION__, i, peer2.received_shares[0]);
+            sum = sum + peer2.received_shares[0];
         }
-        sum_shares.push_back(sum);
+        LC.debug("%s: computed sum", __FUNCTION__);
+        party_t & me(m_party_states[m_id]);
+        me.received_sum_shares.insert(me.received_sum_shares.end(), sum);
+
+        for(int i = 0; i < m_party_states.size(); i++) {
+            m_party_states[i].state = ps_send_sum_share;
+        }
+        LC.info("%s: if first_round round up", __FUNCTION__);
+        return true;
     }
+
+
     for(size_t pid = 0; pid < m_parties; ++pid)
     {
         if(pid == m_id) continue;
-        if(ps_round_up != m_party_states[pid].state)
-            return false;
+        if(ps_round_up != m_party_states[pid].state) {
+            second_round = false;
+            LC.debug("%s: party %lu not ready for round 2", __FUNCTION__, pid);
+        }
     }
 
-//	std::vector<u_int8_t> toss(SHARE_BYTE_SIZE, 0);
-//	for(size_t pid = 0; pid < m_parties; ++pid)
-//	{
-//		for(size_t j = 0; j < SHARE_BYTE_SIZE; ++j)
-//			toss[j] ^= m_party_states[pid].seed[j];
-//		m_party_states[pid].commit.clear();
-//		m_party_states[pid].seed.clear();
-//		m_party_states[pid].state = ps_connected;
-//	}
-
-//	m_toss_outcomes.push_back(toss);
-//	if(m_toss_outcomes.size() == m_rounds)
-//	{
-//		LC.notice("%s: done tossing; all results are in.", __FUNCTION__);
-//		return (m_run_flag = false);
-//	}
-
-//	if(0 != generate_data(m_id, m_party_states[m_id].seed, m_party_states[m_id].commit))
-//	{
-//		LC.error("%s: self data generation failed; toss failure.", __FUNCTION__);
-//		exit(__LINE__);
-//	}
+    if(second_round){
+        LC.debug("%s: round 2 done", __FUNCTION__);
+        return (m_run_flag=false);
+    }
 
     return true;
 }

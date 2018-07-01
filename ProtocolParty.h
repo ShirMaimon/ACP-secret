@@ -34,18 +34,17 @@ private:
 //    Measurement* timer;
 
     vector<FieldType> beta;
-    HIM<FieldType> matrix_for_interpolate;
-    HIM<FieldType> matrix_for_construction;
+    HIM<FieldType> *matrix_for_interpolate;
+    HIM<FieldType> *matrix_for_construction;
     TemplateField<FieldType> *field;
 
-    VDM<FieldType> matrix_vand;
+    VDM<FieldType> *matrix_vand;
 
-    vector<FieldType> shares;
-    vector<FieldType> secrets;
+
 
 
 public:
-    ProtocolParty(string);
+    ProtocolParty<FieldType>(string);
 
     vector<FieldType> reconstruct(vector<FieldType>, vector<FieldType>, vector<FieldType>);
     vector<FieldType> reconstruct(vector<FieldType>, vector<FieldType>);
@@ -53,6 +52,9 @@ public:
     vector<FieldType> generate_shares(vector<FieldType>, vector<FieldType>, int);
     vector<FieldType> generate_shares(vector<FieldType>, int, int, int);
     ~ProtocolParty();
+
+    vector<FieldType> shares;
+    vector<FieldType> secrets;
 };
 
 
@@ -72,19 +74,11 @@ ProtocolParty<FieldType>::ProtocolParty(string field1)
         field = new TemplateField<FieldType>(2147483647);
     }
     else {
-        cout << "you suck" << endl;
+        cout << "error in field type" << endl;
     }
-//    field = new TemplateField<FieldType>(2147483647);
-
-
-//    auto t1 = high_resolution_clock::now();
-//
-//    auto t2 = high_resolution_clock::now();
-
-//    auto duration = duration_cast<milliseconds>(t2-t1).count();
-//    if(flag_print_timings) {
-//        cout << "time in milliseconds initializationPhase: " << duration << endl;
-//    }
+    matrix_for_interpolate = new HIM<FieldType>();
+    matrix_for_construction = new HIM<FieldType>();
+    matrix_vand = new VDM<FieldType>();
 }
 
 /**
@@ -105,11 +99,11 @@ template <class FieldType>
 vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> alpha, vector<FieldType> y, vector<FieldType> beta )
 {
 
-    matrix_for_interpolate.allocate(beta.size(),alpha.size(), field); // might need to change to l
+    matrix_for_interpolate->allocate(beta.size(),alpha.size(), field); // might need to change to l
 
-    matrix_for_interpolate.InitHIMByVectors(alpha, beta);
+    matrix_for_interpolate->InitHIMByVectors(alpha, beta);
 //    vector<FieldType> secret;
-    matrix_for_interpolate.MatrixMult(y, secrets);
+    matrix_for_interpolate->MatrixMult(y, secrets);
  //   this->secret = secret;
 
     return secrets;
@@ -121,7 +115,7 @@ vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares
 
 
 
-    matrix_for_interpolate.allocate(beta.size(),shares.size(), field); // might need to change to l
+    matrix_for_interpolate->allocate(beta.size(),shares.size(), field); // might need to change to l
 
     vector<FieldType> alpha;
     alpha.resize(shares.size());
@@ -133,10 +127,10 @@ vector<FieldType> ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares
     }
 
 
-    matrix_for_interpolate.InitHIMByVectors(alpha, beta);
+    matrix_for_interpolate->InitHIMByVectors(alpha, beta);
 //    vector<FieldType> secrets;
     secrets.resize(beta.size());
-    matrix_for_interpolate.MatrixMult(shares, secrets);
+    matrix_for_interpolate->MatrixMult(shares, secrets);
     return secrets;
 }
 
@@ -161,12 +155,13 @@ bool ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares, int l, int 
     {
         beta[i]=field->GetElement(p-i);
     }
-    for(int i=0; i<shares.size()-(d+1); i++){
+    for(int i=0; i<(shares.size()-(d+1)); i++){
         beta[i+l]=field->GetElement(i+d+2);
     }
 
+
    //matrix_for_interpolate.allocate(beta.size(),shares.size(), field); // might need to change to l
-    matrix_for_interpolate.allocate(beta.size(),d+1, field); // might need to change to l
+    matrix_for_interpolate->allocate(beta.size(),d+1, field); // might need to change to l
 
     vector<FieldType> alpha;
     alpha.resize(d+1);
@@ -178,13 +173,23 @@ bool ProtocolParty<FieldType>::reconstruct(vector<FieldType> shares, int l, int 
     }
 
 
-    matrix_for_interpolate.InitHIMByVectors(alpha, beta);
+
+    matrix_for_interpolate->InitHIMByVectors(alpha, beta);
     //vector<FieldType> secrets;
     secrets.resize(beta.size());
 
-    matrix_for_interpolate.MatrixMult(shares, secrets);
-    for(int i=0; i<shares.size()-(d+1); i++){
-        if(secrets[i+l]!=shares[i]){
+    vector<FieldType> shares_small;
+    shares_small.resize(d+1);
+    for(int i=0; i<d+1; i++){
+        shares_small[i]=shares[i];
+    }
+
+    matrix_for_interpolate->MatrixMult(shares_small, secrets);
+
+
+    for(int i=0; i<(shares.size()-(d+1)); i++){
+        if(secrets[i+l]!=shares[i+(d+1)]){
+            cout<<"bad share: "<<i<<"secret: "<<secrets[i+l]<<" share: "<<shares[i+d+1]<<endl;
             return false;
         }
     }
@@ -196,21 +201,22 @@ template <class FieldType>
 vector<FieldType> ProtocolParty<FieldType>::generate_shares(vector<FieldType> secret, vector<FieldType> beta, int N)
 {
     assert(secret.size()==beta.size());
-    matrix_vand.allocate(N,N,field);
-    matrix_vand.InitVDM();
+    matrix_vand->allocate(N,N,field);
+    matrix_vand->InitVDM();
     vector<FieldType> x1;
+    x1.resize(secret.size());
 
-    x1.push_back(secret[0]);
+    x1[0] = secret[0];
     for(int i = 1; i <= N+1-beta.size(); i++)
     {
         // A random field element, uniform distribution
-        x1.push_back(field->Random());
+        x1[i] = field->Random();
 
     }
 
     //vector<FieldType> shares;
     shares.resize(3);
-    matrix_vand.MatrixMult(x1, shares, N);
+    matrix_vand->MatrixMult(x1, shares, N);
 
 
     return shares;
@@ -219,34 +225,24 @@ vector<FieldType> ProtocolParty<FieldType>::generate_shares(vector<FieldType> se
 template <class FieldType>
 vector<FieldType> ProtocolParty<FieldType>::generate_shares(vector<FieldType> secret, int N, int l, int t)
 {
-//    matrix_vand.allocate(N,N,field);
-//    matrix_vand.InitVDM();
-
     int d=l-1+t;
     vector<FieldType> x1;
+    x1.resize(d+1);
 
     for(int i=0; i<l; i++){
-        x1.push_back(secret[i]);
+        x1[i] = secret[i];
     }
     for(int i = l; i <d+1; i++)
     {
         // A random field element, uniform distribution
-        x1.push_back(field->Random());
+        x1[i] = field->Random();
 
     }
-
-    for(int i=0; i<x1.size(); i++){
-        cout<<"x1("<<i<<"): "<<x1[i]<<endl;
-    }
-//
-//    vector<FieldType> shares;
-//    shares.resize(3);
-//    matrix_vand.MatrixMult(x1, shares, N);
 
 
 
     vector<FieldType> alpha;
-
+    alpha.resize(d+1);
     unsigned long p;
     if(fieldType.compare("Mersenne31")==0){
         p= 2147483647;
@@ -255,39 +251,32 @@ vector<FieldType> ProtocolParty<FieldType>::generate_shares(vector<FieldType> se
     }
 
     // N distinct non-zero field elements
-    alpha.push_back(field->GetElement(0));
-    for(int i=0; i<alpha.size(); i++){
-        cout<<"alpha("<<i<<"): "<<alpha[i]<<endl;
-    }
+    alpha[0]=(field->GetElement(0));
+
     for(int i=1; i<l; i++)
     {
-        alpha.push_back(field->GetElement(p-i));
+        alpha[i]=(field->GetElement(p-i));
     }
-    for(int i=0; i<alpha.size(); i++){
-        cout<<"alpha("<<i<<"): "<<alpha[i]<<endl;
-    }
+
 
     for(int i=l; i<d+1; i++){
-        alpha.push_back(field->GetElement(i-l+1));
+        alpha[i]=(field->GetElement(i-l+1));
     }
 
-    for(int i=0; i<alpha.size(); i++){
-        cout<<"alpha("<<i<<"): "<<alpha[i]<<endl;
-    }
+
     vector<FieldType> beta;
+    beta.resize(N);
     for(int i=0; i<N; i++){
-        beta.push_back(field->GetElement(i+1));
+        beta[i]=(field->GetElement(i+1));
     }
 
-    for(int i=0; i<beta.size(); i++){
-        cout<<"beta("<<i<<"): "<<beta[i]<<endl;
-    }
-    matrix_for_construction.allocate(beta.size(),alpha.size(), field);
-    matrix_for_construction.InitHIMByVectors(alpha, beta);
+    matrix_for_construction->allocate(beta.size(),alpha.size(), field);
+    matrix_for_construction->InitHIMByVectors(alpha, beta);
 
     //vector<FieldType> shares;
     shares.resize(N);
-    matrix_for_construction.MatrixMult(x1, shares);
+    matrix_for_construction->MatrixMult(x1, shares);
+
 
     return shares;
 }
@@ -297,7 +286,7 @@ vector<FieldType> ProtocolParty<FieldType>::generate_shares(vector<FieldType> se
 template <class FieldType>
 ProtocolParty<FieldType>::~ProtocolParty()
 {
-    delete field;
+   // delete field;
 }
 
 

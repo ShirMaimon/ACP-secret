@@ -1,0 +1,165 @@
+18-07-01 14:33:00.861| NOTICE | ct.tmt.001      | log start
+18-07-01 14:33:00.862| NOTICE | ct.tmt.001.ctm  | run: running protocol.
+18-07-01 14:33:00.862| INFO   | ct.tmt.001.ctm  | EDESF
+18-07-01 14:33:00.862| INFO   | ct.tmt.001.ctm  | YOU SUCK
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start: id=1; count=6; file=parties.conf; 
+18-07-01 14:33:00.862| INFO   | ct.tmt.001.ctm  | insure_resource_limits: file descriptors hard limit = 1048576 / required = 28.
+18-07-01 14:33:00.862| INFO   | ct.tmt.001.ctm  | insure_resource_limits: file descriptors soft limit = 1024 / required = 28.
+18-07-01 14:33:00.862| NOTICE | ct.tmt.001.ctm  | start: started 1530444780.862
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | load_peers: count=6;
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start: 6 peers loaded.
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start: peer 0 <127.0.0.1:8000>
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start: peer 1 <127.0.0.1:8001>
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start: peer 2 <127.0.0.1:8002>
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start: peer 3 <127.0.0.1:8003>
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start: peer 4 <127.0.0.1:8004>
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start: peer 5 <127.0.0.1:8005>
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start_service: 
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start_service: self service socket created; fd = 4.
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start_service: socket bound to address 127.0.0.1:8001.
+18-07-01 14:33:00.862| DEBUG  | ct.tmt.001.ctm  | start_service: service socket is listening.
+18-07-01 14:33:00.863| DEBUG  | ct.tmt.001.ctm  | set_accept: 
+18-07-01 14:33:00.863| NOTICE | ct.tmt.001.ctm  | run: starting event loop.
+18-07-01 14:33:00.863| DEBUG  | ct.tmt.001.ctm  | on_connect: id=0; dst=[127.0.0.1:8000]
+18-07-01 14:33:00.863| DEBUG  | ct.tmt.001.ctm  | on_connect: socket created 8.
+18-07-01 14:33:00.863| ERROR  | ct.tmt.001.ctm  | on_connect: connect() failed with error 111 : [Connection refused].
+18-07-01 14:33:00.867| INFO   | ct.tmt.001.ctm  | on_accept: accepted conn fd 8; waiting to select it.
+18-07-01 14:33:00.867| DEBUG  | ct.tmt.001.ctm  | set_peer_conn: peer 3 conn fd 8 is set.
+18-07-01 14:33:00.867| DEBUG  | ct.tmt.001.ctm  | set_accept: 
+18-07-01 14:33:00.867| DEBUG  | ct.tmt.001.ctm  | handle_party_conn: party 3 is now connected.
+18-07-01 14:33:00.872| INFO   | ct.tmt.001.ctm  | on_accept: accepted conn fd 11; waiting to select it.
+18-07-01 14:33:00.872| DEBUG  | ct.tmt.001.ctm  | set_peer_conn: peer 4 conn fd 11 is set.
+18-07-01 14:33:00.872| DEBUG  | ct.tmt.001.ctm  | set_accept: 
+18-07-01 14:33:00.872| INFO   | ct.tmt.001.ctm  | on_accept: accepted conn fd 14; waiting to select it.
+18-07-01 14:33:00.872| DEBUG  | ct.tmt.001.ctm  | set_peer_conn: peer 2 conn fd 14 is set.
+18-07-01 14:33:00.872| DEBUG  | ct.tmt.001.ctm  | set_accept: 
+18-07-01 14:33:00.872| DEBUG  | ct.tmt.001.ctm  | handle_party_conn: party 4 is now connected.
+18-07-01 14:33:00.872| DEBUG  | ct.tmt.001.ctm  | handle_party_conn: party 2 is now connected.
+18-07-01 14:33:00.880| INFO   | ct.tmt.001.ctm  | on_accept: accepted conn fd 17; waiting to select it.
+18-07-01 14:33:00.881| DEBUG  | ct.tmt.001.ctm  | set_peer_conn: peer 5 conn fd 17 is set.
+18-07-01 14:33:00.881| DEBUG  | ct.tmt.001.ctm  | handle_party_conn: party 5 is now connected.
+18-07-01 14:33:00.881| DEBUG  | ct.tmt.001.ctm  | set_accept: 
+18-07-01 14:33:01.863| DEBUG  | ct.tmt.001.ctm  | on_connect: id=0; dst=[127.0.0.1:8000]
+18-07-01 14:33:01.863| DEBUG  | ct.tmt.001.ctm  | on_connect: socket created 20.
+18-07-01 14:33:01.864| INFO   | ct.tmt.001.ctm  | on_connect: successfully connected to peer 0 using fd 20
+18-07-01 14:33:01.864| INFO   | ct.tmt.001.ctm  | on_connect: selection id successfully sent to peer 0 using fd 20
+18-07-01 14:33:01.864| DEBUG  | ct.tmt.001.ctm  | handle_party_conn: party 0 is now connected.
+18-07-01 14:33:01.864| INFO   | ct.tmt.001.ctm  | party_run_around: reached connected 0
+18-07-01 14:33:01.864| INFO   | ct.tmt.001.ctm  | party_run_around: sending 146 to party 0
+18-07-01 14:33:01.864| DEBUG  | ct.tmt.001.ctm  | send: dst_id=0; size=8;
+18-07-01 14:33:01.864| ERROR  | ct.tmt.001.ctm  | party_run_around: party id 0 share send NOT failure.
+18-07-01 14:33:01.864| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 0
+18-07-01 14:33:01.864| INFO   | ct.tmt.001.ctm  | party_run_around: its empty :(
+18-07-01 14:33:01.864| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 0
+18-07-01 14:33:01.864| INFO   | ct.tmt.001.ctm  | party_run_around: its empty :(
+18-07-01 14:33:01.864| DEBUG  | ct.tmt.001.ctm  | set_peer_conn: peer 0 conn fd 20 is set.
+18-07-01 14:33:01.864| DEBUG  | ct.tmt.001.ctm  | on_write1: added a writer event of peer id 0 with fd 20.
+18-07-01 14:33:01.864| DEBUG  | ct.tmt.001.ctm  | on_write2: 8 bytes spliced out to peer id 0 with fd 20.
+18-07-01 14:33:01.864| DEBUG  | ct.tmt.001.ctm  | on_write2: added a writer event of peer id 0 with fd 20.
+18-07-01 14:33:01.865| DEBUG  | ct.tmt.001.ctm  | on_read: 16 bytes read from peer id 0 with fd 20.
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 0
+18-07-01 14:33:01.865| DEBUG  | ct.tmt.001.ctm  | party_run_around: receiving share 165 from party 0
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: reached connected 2
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: sending 64 to party 2
+18-07-01 14:33:01.865| DEBUG  | ct.tmt.001.ctm  | send: dst_id=2; size=8;
+18-07-01 14:33:01.865| ERROR  | ct.tmt.001.ctm  | party_run_around: party id 2 share send NOT failure.
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 2
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: its empty :(
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 2
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: its empty :(
+18-07-01 14:33:01.865| DEBUG  | ct.tmt.001.ctm  | on_write1: added a writer event of peer id 2 with fd 14.
+18-07-01 14:33:01.865| DEBUG  | ct.tmt.001.ctm  | on_write2: 8 bytes spliced out to peer id 2 with fd 14.
+18-07-01 14:33:01.865| DEBUG  | ct.tmt.001.ctm  | on_write2: added a writer event of peer id 2 with fd 14.
+18-07-01 14:33:01.865| DEBUG  | ct.tmt.001.ctm  | on_read: 8 bytes read from peer id 3 with fd 8.
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 2
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: its empty :(
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 2
+18-07-01 14:33:01.865| INFO   | ct.tmt.001.ctm  | party_run_around: its empty :(
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_read: 8 bytes read from peer id 4 with fd 11.
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 2
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: its empty :(
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 2
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: its empty :(
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_read: 8 bytes read from peer id 2 with fd 14.
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 2
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | party_run_around: receiving share 92 from party 2
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: reached connected 3
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: sending 130 to party 3
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | send: dst_id=3; size=8;
+18-07-01 14:33:01.866| ERROR  | ct.tmt.001.ctm  | party_run_around: party id 3 share send NOT failure.
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 3
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | party_run_around: receiving share 75 from party 3
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: reached connected 4
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: sending 124 to party 4
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | send: dst_id=4; size=8;
+18-07-01 14:33:01.866| ERROR  | ct.tmt.001.ctm  | party_run_around: party id 4 share send NOT failure.
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 4
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | party_run_around: receiving share 228 from party 4
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: reached connected 5
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: sending 135 to party 5
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | send: dst_id=5; size=8;
+18-07-01 14:33:01.866| ERROR  | ct.tmt.001.ctm  | party_run_around: party id 5 share send NOT failure.
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 5
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: its empty :(
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 5
+18-07-01 14:33:01.866| INFO   | ct.tmt.001.ctm  | party_run_around: its empty :(
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_write1: added a writer event of peer id 3 with fd 8.
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_write1: added a writer event of peer id 4 with fd 11.
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_write1: added a writer event of peer id 5 with fd 17.
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_write2: 8 bytes spliced out to peer id 3 with fd 8.
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_write2: added a writer event of peer id 3 with fd 8.
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_write2: 8 bytes spliced out to peer id 4 with fd 11.
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_write2: added a writer event of peer id 4 with fd 11.
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_write2: 8 bytes spliced out to peer id 5 with fd 17.
+18-07-01 14:33:01.866| DEBUG  | ct.tmt.001.ctm  | on_write2: added a writer event of peer id 5 with fd 17.
+18-07-01 14:33:01.867| DEBUG  | ct.tmt.001.ctm  | on_read: 8 bytes read from peer id 5 with fd 17.
+18-07-01 14:33:01.867| INFO   | ct.tmt.001.ctm  | party_run_around: reached shares sent 5
+18-07-01 14:33:01.867| DEBUG  | ct.tmt.001.ctm  | party_run_around: receiving share 181 from party 5
+18-07-01 14:33:01.867| DEBUG  | ct.tmt.001.ctm  | round_up: round up
+18-07-01 14:33:01.867| DEBUG  | ct.tmt.001.ctm  | round_up: yay first round is over
+18-07-01 14:33:01.867| DEBUG  | ct.tmt.001.ctm  | round_up made pointer to party 0, value is 1473312421
+18-07-01 14:33:01.867| DEBUG  | ct.tmt.001.ctm  | round_up made pointer to party 1, value is 253879907
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | round_up made pointer to party 2, value is 831100764
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | round_up made pointer to party 3, value is 1498674251
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | round_up made pointer to party 4, value is 865893092
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | round_up made pointer to party 5, value is 625821365
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | round_up: computed sum
+18-07-01 14:33:01.868| INFO   | ct.tmt.001.ctm  | round_up: if first_round round up
+18-07-01 14:33:01.868| INFO   | ct.tmt.001.ctm  | party_run_around: reached sending sum share 0
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | send: dst_id=0; size=8;
+18-07-01 14:33:01.868| INFO   | ct.tmt.001.ctm  | party_run_around: reached sending sum share 2
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | send: dst_id=2; size=8;
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | on_write1: added a writer event of peer id 0 with fd 20.
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | on_write1: added a writer event of peer id 2 with fd 14.
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | on_write2: 8 bytes spliced out to peer id 0 with fd 20.
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | on_write2: added a writer event of peer id 0 with fd 20.
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | on_write2: 8 bytes spliced out to peer id 2 with fd 14.
+18-07-01 14:33:01.868| DEBUG  | ct.tmt.001.ctm  | on_write2: added a writer event of peer id 2 with fd 14.
+18-07-01 14:33:01.870| DEBUG  | ct.tmt.001.ctm  | on_read: 8 bytes read from peer id 2 with fd 14.
+18-07-01 14:33:01.871| INFO   | ct.tmt.001.ctm  | party_run_around: reached sending sum share 3
+18-07-01 14:33:01.871| DEBUG  | ct.tmt.001.ctm  | send: dst_id=3; size=8;
+18-07-01 14:33:01.871| DEBUG  | ct.tmt.001.ctm  | on_write1: added a writer event of peer id 3 with fd 8.
+18-07-01 14:33:01.871| DEBUG  | ct.tmt.001.ctm  | on_write2: 8 bytes spliced out to peer id 3 with fd 8.
+18-07-01 14:33:01.871| DEBUG  | ct.tmt.001.ctm  | on_write2: added a writer event of peer id 3 with fd 8.
+18-07-01 14:33:01.872| DEBUG  | ct.tmt.001.ctm  | on_read: 8 bytes read from peer id 3 with fd 8.
+18-07-01 14:33:01.872| INFO   | ct.tmt.001.ctm  | party_run_around: reached sending sum share 4
+18-07-01 14:33:01.872| DEBUG  | ct.tmt.001.ctm  | send: dst_id=4; size=8;
+18-07-01 14:33:01.872| DEBUG  | ct.tmt.001.ctm  | on_write1: added a writer event of peer id 4 with fd 11.
+18-07-01 14:33:01.872| DEBUG  | ct.tmt.001.ctm  | on_write2: 8 bytes spliced out to peer id 4 with fd 11.
+18-07-01 14:33:01.872| DEBUG  | ct.tmt.001.ctm  | on_write2: added a writer event of peer id 4 with fd 11.
+18-07-01 14:33:01.873| DEBUG  | ct.tmt.001.ctm  | on_read: 8 bytes read from peer id 4 with fd 11.
+18-07-01 14:33:01.873| INFO   | ct.tmt.001.ctm  | party_run_around: reached sending sum share 5
+18-07-01 14:33:01.873| DEBUG  | ct.tmt.001.ctm  | send: dst_id=5; size=8;
+18-07-01 14:33:01.873| DEBUG  | ct.tmt.001.ctm  | on_write1: added a writer event of peer id 5 with fd 17.
+18-07-01 14:33:01.873| DEBUG  | ct.tmt.001.ctm  | on_write2: 8 bytes spliced out to peer id 5 with fd 17.
+18-07-01 14:33:01.873| DEBUG  | ct.tmt.001.ctm  | on_write2: added a writer event of peer id 5 with fd 17.
+18-07-01 14:33:01.874| DEBUG  | ct.tmt.001.ctm  | on_read: 8 bytes read from peer id 5 with fd 17.
+18-07-01 14:33:01.874| DEBUG  | ct.tmt.001.ctm  | round_up: round up
+18-07-01 14:33:01.874| DEBUG  | ct.tmt.001.ctm  | round_up: round 2 done
+18-07-01 14:34:01.883| WARN   | ct.tmt.001.ctm  | on_read: peer disconnected.
+18-07-01 14:34:01.883| INFO   | ct.tmt.001.ctm  | disconnect_peer: peer 5 is being disconnected.
+18-07-01 14:34:02.864| DEBUG  | ct.tmt.001.ctm  | on_timer: run flag down; breaking event loop.
+18-07-01 14:34:02.864| NOTICE | ct.tmt.001.ctm  | run: event loop stopped.
+18-07-01 14:34:02.864| NOTICE | ct.tmt.001.ctm  | stop: stopped 1530444842.864
+18-07-01 14:34:02.865| INFO   | ct.tmt.001.ctm  | post_run: shares valid
+18-07-01 14:34:02.865| NOTICE | ct.tmt.001      | test_tcp_mesh_coin_toss: 1 round tcp mesh coin toss test succeeded.

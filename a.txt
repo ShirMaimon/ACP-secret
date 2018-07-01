@@ -1,0 +1,19 @@
+!!!Hello World!!!
+cpid: 4518
+cpid: 4519
+cpid: 4520
+cpid: 4521
+cpid: 4522
+cpid: 4523
+secret 0: 6000
+secret 1: 6000
+secret 0: 6000
+secret 1: 6000
+secret 0: 6000
+secret 1: 6000
+secret 0: 6000
+secret 1: 6000
+secret 0: 6000
+secret 1: 6000
+secret 0: 6000
+secret 1: 6000

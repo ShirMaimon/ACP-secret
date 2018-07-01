@@ -24,6 +24,8 @@
 #include "coin_toss_test.h"
 #include "cc_udp_test.h"
 
+using namespace std;
+
 void get_options(int argc, char *argv[], size_t & parties, std::string & conf_file, size_t & rounds, int & log_level, int &field);
 void show_usage(const char * prog);
 void init_log(const char * a_log_file, const char * a_log_dir, const int log_level, const char * logcat);

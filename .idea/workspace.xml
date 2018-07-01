@@ -13,20 +13,30 @@
   <component name="ChangeListManager">
     <list default="true" id="1d098199-6e46-4eee-8815-3bb451ef247f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Progress/1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Progress/3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Progress/count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/cc_coin_toss.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/coin_toss_test.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/coin_toss_tester.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/coin_toss_tester.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/depend.internal" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/cointoss.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/feature_tests.c" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/feature_tests.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProtocolParty.h" beforeDir="false" afterPath="$PROJECT_DIR$/ProtocolParty.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc_coin_toss.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cc_coin_toss.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc_coin_toss.h" beforeDir="false" afterPath="$PROJECT_DIR$/cc_coin_toss.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coin_toss_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/coin_toss_test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coin_toss_test.h" beforeDir="false" afterPath="$PROJECT_DIR$/coin_toss_test.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_install.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/coin_toss_tester.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/coin_toss_tester.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cointoss" beforeDir="false" afterPath="$PROJECT_DIR$/cointoss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cointoss.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cointoss.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parties.conf" beforeDir="false" afterPath="$PROJECT_DIR$/parties.conf" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/CMakeFiles/" />
@@ -40,11 +50,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Default" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="cc_coin_toss.h" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cc_coin_toss.h">
+      <file leaf-file-name="cc_coin_toss.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cc_coin_toss.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="169" column="59" lean-forward="true" selection-start-line="169" selection-start-column="59" selection-end-line="169" selection-end-column="59" />
+            <state relative-caret-position="4155">
+              <caret line="277" column="11" selection-start-line="277" selection-start-column="11" selection-end-line="277" selection-end-column="11" />
               <folding>
                 <element signature="e#1#20#0" expanded="true" />
               </folding>
@@ -52,11 +62,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cc_coin_toss.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cc_coin_toss.cpp">
+      <file leaf-file-name="cc_coin_toss.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cc_coin_toss.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+            <state relative-caret-position="331">
+              <caret line="163" column="23" selection-start-line="163" selection-start-column="23" selection-end-line="163" selection-end-column="23" />
+              <folding>
+                <element signature="e#679#688#0" expanded="true" />
+                <element signature="e#6191#7431#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rand.h" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/libscapi/install/include/openssl/rand.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -64,17 +87,11 @@
       <file leaf-file-name="ProtocolParty.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ProtocolParty.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="61" column="23" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="coin_toss_test.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/coin_toss_test.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="154" selection-start-line="3" selection-start-column="154" selection-end-line="3" selection-end-column="154" />
+            <state relative-caret-position="665">
+              <caret line="288" column="19" selection-start-line="288" selection-start-column="19" selection-end-line="288" selection-end-column="19" />
+              <folding>
+                <element signature="e#215#264#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -82,8 +99,13 @@
       <file leaf-file-name="coin_toss_test.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/coin_toss_test.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="33" column="84" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
+            <state relative-caret-position="495">
+              <caret line="33" column="74" selection-start-line="33" selection-start-column="74" selection-end-line="33" selection-end-column="74" />
+              <folding>
+                <element signature="e#1#20#0" expanded="true" />
+                <element signature="e#1722#2655#0" />
+                <element signature="e#2657#3583#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -91,17 +113,8 @@
       <file leaf-file-name="coin_toss_tester.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/coin_toss_tester.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="83" column="18" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+            <state relative-caret-position="210">
+              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -111,7 +124,22 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>round_up</find>
+      <find>cc</find>
+      <find>free</find>
       <find>sum_shares</find>
+      <find>Templ</find>
+      <find>elementTo</find>
+      <find>push_back</find>
+      <find>ps_shares_sent</find>
+      <find>SEF</find>
+      <find>push</find>
+      <find>ps_connected</find>
+      <find>valid_shares</find>
+      <find>sad</find>
+      <find>generated_shares</find>
+      <find>.end()</find>
+      <find>msg</find>
+      <find>cout</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -120,13 +148,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/coin_toss_test.h" />
-        <option value="$PROJECT_DIR$/coin_toss_test.cpp" />
         <option value="$PROJECT_DIR$/cc_coin_toss.cpp" />
-        <option value="$PROJECT_DIR$/cc_coin_toss.h" />
-        <option value="$PROJECT_DIR$/ProtocolParty.h" />
         <option value="$PROJECT_DIR$/coin_toss_tester.cpp" />
+        <option value="$PROJECT_DIR$/coin_toss_test.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/ProtocolParty.h" />
+        <option value="$PROJECT_DIR$/cc_coin_toss.h" />
       </list>
     </option>
   </component>
@@ -152,7 +180,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -164,6 +191,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -187,7 +215,7 @@
   </component>
   <component name="RunManager" selected="Application.cointoss">
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Default" EXPLICIT_BUILD_TARGET_NAME="all" />
-    <configuration name="cointoss" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cointoss" TARGET_NAME="cointoss" CONFIG_NAME="Default" RUN_TARGET_PROJECT_NAME="cointoss" RUN_TARGET_NAME="cointoss" />
+    <configuration name="cointoss" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-n 6 -f parties.conf -r 1 -l 700 -z 31" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cointoss" TARGET_NAME="cointoss" CONFIG_NAME="Default" RUN_TARGET_PROJECT_NAME="cointoss" RUN_TARGET_NAME="cointoss" />
     <list>
       <item itemvalue="Application.Build All" />
       <item itemvalue="Application.cointoss" />
@@ -209,20 +237,29 @@
       <workItem from="1529581741800" duration="3798000" />
       <workItem from="1529587477425" duration="26397000" />
       <workItem from="1529849416911" duration="3307000" />
+      <workItem from="1529909662718" duration="18000000" />
+      <workItem from="1529933151643" duration="18405000" />
+      <workItem from="1530019726155" duration="223000" />
+      <workItem from="1530020163775" duration="357000" />
+      <workItem from="1530020699783" duration="992000" />
+      <workItem from="1530102183396" duration="2349000" />
+      <workItem from="1530174196893" duration="15381000" />
+      <workItem from="1530428573846" duration="7372000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35217000" />
+    <option name="totallyTimeSpent" value="98296000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1377" height="852" extended-state="6" />
+    <frame x="64" y="-11" width="1377" height="787" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17745455" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1949091" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.32923076" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32896176" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -233,10 +270,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32896176" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32896176" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32896176" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,13 +281,57 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="6" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ProtocolParty.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="61" column="23" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
+          <folding>
+            <element signature="e#215#264#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coin_toss_test.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="154" selection-start-line="3" selection-start-column="154" selection-end-line="3" selection-end-column="154" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coin_toss_test.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="84" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coin_toss_tester.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1245">
+          <caret line="83" column="18" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cc_coin_toss.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
           <folding>
-            <element signature="e#1#20#0" expanded="true" />
+            <element signature="e#679#688#0" expanded="true" />
+            <element signature="e#6191#7431#0" />
           </folding>
         </state>
       </provider>
@@ -309,9 +389,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#121#140#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -320,7 +397,8 @@
         <state relative-caret-position="555">
           <caret line="37" column="103" lean-forward="true" selection-start-line="37" selection-start-column="103" selection-end-line="39" selection-end-column="116" />
           <folding>
-            <element signature="e#1#20#0" expanded="true" />
+            <element signature="e#679#688#0" expanded="true" />
+            <element signature="e#6191#7431#0" />
           </folding>
         </state>
       </provider>
@@ -342,13 +420,7 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/TemplateField.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#121#140#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/cc_coin_toss.cpp">
       <provider selected="true" editor-type-id="text-editor">
@@ -421,27 +493,8 @@
     <entry file="file://$PROJECT_DIR$/GF2_8LookupTable.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../comm_client/ac_protocol.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../comm_client/comm_client_tcp_mesh.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="110" column="26" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/comm_client/ac_protocol.h" />
+    <entry file="file://$USER_HOME$/comm_client/comm_client_tcp_mesh.cpp" />
     <entry file="file:///usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="295">
@@ -456,10 +509,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TemplateField.cpp">
+    <entry file="file://$USER_HOME$/ACP/comm_client/ac_protocol.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1740">
-          <caret line="116" column="5" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
+        <state relative-caret-position="75">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/libscapi/include/primitives/Matrix.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="820">
+          <caret line="74" column="17" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ACP/comm_client/comm_client_tcp_mesh.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="52" column="26" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ACP/comm_client/ac_protocol.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="178" column="21" selection-start-line="178" selection-start-column="21" selection-end-line="178" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -467,46 +541,79 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#121#140#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cc_coin_toss.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
-        </state>
-      </provider>
+    <entry file="file:///usr/include/c++/5/bits/stl_bvector.h">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ProtocolParty.h">
+    <entry file="file://$PROJECT_DIR$/TemplateField.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="61" column="23" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coin_toss_tester.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="83" column="18" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
+        <state relative-caret-position="105">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/coin_toss_test.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="33" column="84" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
+        <state relative-caret-position="495">
+          <caret line="33" column="74" selection-start-line="33" selection-start-column="74" selection-end-line="33" selection-end-column="74" />
+          <folding>
+            <element signature="e#1#20#0" expanded="true" />
+            <element signature="e#1722#2655#0" />
+            <element signature="e#2657#3583#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coin_toss_tester.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cc_coin_toss.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4155">
+          <caret line="277" column="11" selection-start-line="277" selection-start-column="11" selection-end-line="277" selection-end-column="11" />
+          <folding>
+            <element signature="e#1#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ProtocolParty.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="288" column="19" selection-start-line="288" selection-start-column="19" selection-end-line="288" selection-end-column="19" />
+          <folding>
+            <element signature="e#215#264#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/libscapi/install/include/openssl/rand.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cc_coin_toss.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="169" column="59" lean-forward="true" selection-start-line="169" selection-start-column="59" selection-end-line="169" selection-end-column="59" />
+        <state relative-caret-position="331">
+          <caret line="163" column="23" selection-start-line="163" selection-start-column="23" selection-end-line="163" selection-end-column="23" />
           <folding>
-            <element signature="e#1#20#0" expanded="true" />
+            <element signature="e#679#688#0" expanded="true" />
+            <element signature="e#6191#7431#0" />
           </folding>
         </state>
       </provider>

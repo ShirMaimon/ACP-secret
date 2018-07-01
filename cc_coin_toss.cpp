@@ -107,7 +107,7 @@
 //
 //    party_t & peer(m_party_states[m_id]);
 //
-//    peer.shares_rcvd.insert(peer.shares_rcvd.end(), generated_shares.data(), generated_shares.data() + generated_shares.size());
+//    peer.received_shares.insert(peer.received_shares.end(), generated_shares.data(), generated_shares.data() + generated_shares.size());
 //
 ////	if(RAND_bytes(seed.data(), 16))
 ////	{
@@ -200,7 +200,7 @@
 //	case ps_nil:
 //		return false;
 //	case ps_connected:
-//		if(0 != m_cc->send(party_id, self.shares_rcvd[party_id], SHARE_BYTE_SIZE))
+//		if(0 != m_cc->send(party_id, self.received_shares[party_id], SHARE_BYTE_SIZE))
 //		{
 //			LC.error("%s: party id %lu share send failure.", __FUNCTION__, party_id);
 //			return (m_run_flag = false);
@@ -242,17 +242,17 @@
 //
 //
 //	case ps_shares_sent:
-//		if(peer.shares_rcvd.size() < SHARE_BYTE_SIZE)      // write an if condition and check according to fieldType
+//		if(peer.received_shares.size() < SHARE_BYTE_SIZE)      // write an if condition and check according to fieldType
 //		{
 //			if(!peer.data.empty())
 //			{
 //				size_t chunk_size = SHARE_BYTE_SIZE;
 //				//if(peer.data.size() < chunk_size) chunk_size = peer.data.size();
-//				peer.shares_rcvd.insert(peer.shares_rcvd.end(), peer.data.data(), peer.data.data() + chunk_size);
+//				peer.received_shares.insert(peer.received_shares.end(), peer.data.data(), peer.data.data() + chunk_size);
 //				peer.data.erase(peer.data.begin(), peer.data.begin() + chunk_size);
 //			}
 //
-//			if(peer.shares_rcvd.size() < SHARE_BYTE_SIZE)
+//			if(peer.received_shares.size() < SHARE_BYTE_SIZE)
 //				return false;//wait for more data
 //		}
 //		peer.state = ps_first_round_up;
@@ -274,7 +274,7 @@
 //    if(ps_first_round_up==m_party_states[pid].state){
 //        for (int i = 0; i < m_party_states.size(); i++) {
 //            party_t & peer2(m_party_states[i]);
-//            sum = sum + peer2.shares_rcvd.data();
+//            sum = sum + peer2.received_shares.data();
 //        }
 //        sum_shares.push_back(sum);
 //    }
