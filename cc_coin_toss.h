@@ -106,6 +106,7 @@ cc_coin_toss<T>::cc_coin_toss(const comm_client_factory::client_type_t cc_type, 
 template <class T>
 cc_coin_toss<T>::~cc_coin_toss()
 {
+    delete temp;
 }
 
 template <class T>
@@ -113,7 +114,12 @@ int cc_coin_toss<T>::run(const size_t id, const size_t parties, const char * con
 {
     LC.notice("%s: running protocol.", __FUNCTION__);
     m_rounds = rounds;
-    return ac_protocol::run_ac_protocol(id, parties, conf_file, idle_timeout_seconds);
+
+    for(int i = 0; i < m_rounds; i ++) {
+        ac_protocol::run_ac_protocol(id, parties, conf_file, idle_timeout_seconds);
+    }
+
+    return 1;
 }
 
 template <class T>
